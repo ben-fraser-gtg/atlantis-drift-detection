@@ -1,10 +1,17 @@
-name: 'Atlantis terraform drift detection'
-description: 'Some automation to detect drift inside atlantis via the remote /plan endpoint'
+name: "Atlantis terraform drift detection"
+description: "Some automation to detect drift inside atlantis via the remote /plan endpoint"
 branding:
-  icon: 'activity'
-  color: 'blue'
+  icon: "activity"
+  color: "blue"
+inputs:
+  config_path:
+    description: "Optional path to atlantis.yaml inside the action container"
+    required: false
+    default: ""
 runs:
-  using: 'docker'
+  using: "docker"
   # TODO: Figure out a way to auto update this. It's very useful for speeding up the action to not have it build the
   # container each run
-  image: 'docker://ghcr.io/cresta/atlantis-drift-detection:v1'
+  image: "docker://ghcr.io/ben-fraser-gtg/atlantis-drift-detection:0.0.1"
+  env:
+    ATLANTIS_CONFIG_PATH: ${{ inputs.config_path }}

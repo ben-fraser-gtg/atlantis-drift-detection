@@ -47,6 +47,14 @@ func ParseRepoConfig(body string) (*SimpleAtlantisConfig, error) {
 }
 
 func ParseRepoConfigFromDir(dir string) (*SimpleAtlantisConfig, error) {
+	if override := os.Getenv("ATLANTIS_CONFIG_PATH"); override != "" {
+		body, err := os.ReadFile(override)
+		if err != nil {
+			return nil, fmt.Errorf("error reading config override: %s", err)
+		}
+		return ParseRepoConfig(string(body))
+	}
+
 	filename := filepath.Join(dir, "atlantis.yaml")
 	body, err := os.ReadFile(filename)
 	if err != nil {
