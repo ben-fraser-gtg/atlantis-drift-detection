@@ -12,6 +12,6 @@ runs:
   using: "docker"
   # TODO: Figure out a way to auto update this. It's very useful for speeding up the action to not have it build the
   # container each run
-  image: "docker://ghcr.io/ben-fraser-gtg/atlantis-drift-detection:0.0.1"
+  image: "docker://ghcr.io/ben-fraser-gtg/atlantis-drift-detection:v0.0.1"
   env:
     ATLANTIS_CONFIG_PATH: ${{ inputs.config_path }}
